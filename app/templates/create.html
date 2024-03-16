@@ -1,43 +1,48 @@
-{% extends 'base.html' %}
-
+{% extends "base.html" %} 
 {% block main %}
-<h1 class="page-header">Add New Property</h1>
 
+<h1>Add New Property</h1>
+<hr/>
+<p>Please fill out this form to add a new property...</p>
+<div class="form">
+  <form action="{{url_for('create')}}" method="post" enctype="multipart/form-data">
+    {{ form.csrf_token }}
 
+    {{ form.title.label (class="font-weight-bold") }}
+    {{ form.title (class="form-control")}}
 
-{# Add the appropriate method and enctype attributes to the form tag to allow for file uploads #}
-<form action="{{ url_for('create') }}" method="post" enctype="multipart/form-data">
-  {% include 'flash_messages.html' %}
-  {{ form.csrf_token }}
+    {{ form.description.label (class="f-label font-weight-bold")}}
+    {{ form.description (class="form-control")}}
 
-  <div class="form-group">
-    {{form.title.label(class="form-control-label")}}
-    {{form.title(class="form-control")}}
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        {{ form.bedrooms.label (class="f-label font-weight-bold")}}
+        {{ form.bedrooms (class="form-control")}}
+      </div>
+      <div class="form-group col-md-6">
+        {{ form.bathrooms.label (class="f-label font-weight-bold")}}
+        {{ form.bathrooms (class="form-control")}}
+      </div>
+    </div>
 
-    {{form.bedrooms.label(class="form-control-label")}}
-    {{form.bedrooms(class="form-control")}}
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        {{ form.price.label (class="f-label font-weight-bold")}}
+        {{ form.price (class="form-control")}}
+      </div>
+      <div class="form-group col-md-6">
+        {{ form.type.label (class="f-label font-weight-bold")}}
+        {{ form.type (class="custom-select mr-sm-2")}}
+      </div>
+    </div>
 
-    {{form.bathrooms.label(class="form-control-label")}}
-    {{form.bathrooms(class="form-control")}}
+    {{ form.location.label (class="f-label font-weight-bold")}}
+    {{ form.location (class="form-control")}}
 
-    {{form.location.label(class="form-control-label")}}
-    {{form.location(class="form-control")}}
+    {{ form.photo.label (class="f-label font-weight-bold")}}
+    {{ form.photo(class="form-control-file")}}<br>
+    <button class="btn btn-primary" type="submit">Add Property</button>
+  </form>
+</div>
 
-    {{form.price.label(class="form-control-label")}}
-    {{form.price(class="form-control")}}
-
-    {{form.type.label(class="form-control-label")}}
-    {{form.type(class="form-control")}}
-
-    {{form.description.label(class="form-control-label")}}
-    {{form.description(class="form-control")}}
-
-    {{form.photo.label(class="form-control-label")}}
-    {{form.photo(class="form-control")}}
-  </div>
-
-  {# Add the file upload field as you learnt for Flask-WTF #}
-
-  <button type="submit" name="submit" class="btn btn-primary">Upload file</button>
-</form>
 {% endblock %}
